@@ -1,48 +1,47 @@
+//Creamos una instancia de socket.io del lado del cliente
 const socket = io();
 
-socket.on("productos", (data) => {
-  renderProductos(data);
+//Creamos una variable para guardar el usuario:
+let user;
+const chatBox = document.getElementById("chatBox");
+
+//Sweet Alert 2: es una libreria que nos permite crear alertas personalizadas
+
+//Swal es un objeto global que nos permite usar los métodos de las librerias
+//Fire es un método nos permite configurar el alert
+
+Swal.fire({
+  title: "Identificate",
+  input: "text",
+  text: "Ingresa un usuario para identificarte en el chat",
+  inputValidator: (value) => {
+    return !value && "Necesitas escribir un nombre para continuar";
+  },
+  allowOutsideClick: false,
+}).then((result) => {
+  user = result.value;
 });
 
-const renderProductos = (productos) => {
-  const contenedorProductos = document.getElementById("contenedorProductos");
-  contenedorProductos.innerHTML = "";
+chatBox.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    if (chatBox.value.trim().length > 0) {
+      //trim nos permite sacar los espacios en blanco del principio y del final de un string.
+      //Si el mensaje tiene mas de 9 caracteres, lo enviamos al servidor.
+      socket.emit("message", { user: user, message: chatBox.value });
+      chatBox.value = "";
+    }
+  }
+});
 
-  productos.forEach((item) => {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.innerHTML = `
-            <p class="card-title">${item.title} </p>
-            <p class="card-id">Id del producto: ${item.id} </p>
-            <p class="card-price">$${item.price} </p>
-            <button class="card-btn-eliminar">Eliminar Producto</button>
-        `;
-    contenedorProductos.appendChild(card);
+//Listener de mensajes:
 
-    card.querySelector("button").addEventListener("click", () => {
-      eliminarProducto(item.id);
-    });
+socket.on("message", (data) => {
+  let log = document.getElementById("messagesLogs");
+  let messages = "";
+
+  data.forEach((message) => {
+    messages = messages + `${message.user}: ${message.message} <br>`;
   });
-};
 
-const eliminarProducto = (id) => {
-  socket.emit("eliminarProducto", id);
-};
-
-document.getElementById("btnEnviar").addEventListener("click", () => {
-  agregarProducto();
+  log.innerHTML = messages;
 });
-
-const agregarProducto = () => {
-  const producto = {
-    title: document.getElementById("title").value,
-    description: document.getElementById("description").value,
-    price: document.getElementById("price").value,
-    code: document.getElementById("code").value,
-    stock: document.getElementById("stock").value,
-    category: document.getElementById("category").value,
-    status: document.getElementById("status").value === "true",
-  };
-
-  socket.emit("agregarProducto", producto);
-};
