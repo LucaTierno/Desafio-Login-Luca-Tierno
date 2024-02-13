@@ -31,7 +31,7 @@ class ProductManager {
       title,
       description,
       price,
-      img,
+      img: "Sin imagen",
       code,
       stock,
       category,
