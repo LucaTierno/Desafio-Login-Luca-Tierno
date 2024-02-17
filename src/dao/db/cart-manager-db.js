@@ -71,11 +71,11 @@ class CartManager {
 
       cartSelected.products.splice(productIndex, 1);
 
-      const updateCart = await cartSelected.save();
+      await cartSelected.save();
 
       console.log("Producto eliminado correctamente");
 
-      return updateCart;
+      return cartSelected;
     } catch (error) {
       console.log("Error al eliminar el producto ", error);
       throw error;
@@ -93,14 +93,14 @@ class CartManager {
         return null;
       }
 
-      newProducts.forEach(newProduct => {
+      newProducts.forEach((newProduct) => {
         cartSelected.products.push(newProduct);
       });
 
       await cartSelected.save();
 
-      console.log("Carrito actualizado con éxito")
-
+      console.log("Carrito actualizado con éxito");
+      return cartSelected;
     } catch (error) {
       console.log("Error al actualizar el carrito ", error);
       throw error;
@@ -131,8 +131,8 @@ class CartManager {
       cartSelected.products[productIndex].quantity = quantity;
 
       await cartSelected.save();
-
       console.log("Cantidad del producto actualizada con éxito");
+      return cartSelected;
     } catch (error) {
       console.log("Error al actualizar el carrito ", error);
       throw error;
@@ -142,17 +142,16 @@ class CartManager {
   //ELIMINAR TODOS LOS PRODUCTOS DEL CARRITO
   async deleteProductCart(cartId) {
     try {
-      const cartSelected = await this.getCarritoById(cartId);
+      const cartSelected = await CartModel.findByIdAndUpdate(
+        cartId,
+        { products: [] },
+        { new: true }
+      );
 
       //Verificamos que el carrito exista:
       if (!cartSelected) {
-        console.log("No se encontró el carrito");
-        return null;
+        throw new Error("Carrito no encontrado");
       }
-
-      cartSelected.products = [];
-
-      await cartSelected.save();
 
       console.log("Todos los productos fueron eliminados con éxito");
       return cartSelected;

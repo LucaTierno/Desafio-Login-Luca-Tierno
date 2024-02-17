@@ -7,6 +7,8 @@ const ProductModel = require("../dao/models/product.model");
 
 //Routes:
 
+//LISTAMOS TODOS LOS PRODUCTOS
+
 router.get("/", async (req, res) => {
   const page = req.query.page || 1;
   const limit = req.query.limit || 10;
@@ -24,7 +26,9 @@ router.get("/", async (req, res) => {
       return rest;
     });
 
-    res.render("index", {
+    res.render("products", {
+      status: "success",
+      payload: resultListProduct,
       product: resultListProduct,
       hasPrevPage: listProduct.hasPrevPage,
       hasNextPage: listProduct.hasNextPage,
@@ -38,6 +42,8 @@ router.get("/", async (req, res) => {
     res.status(500).send("Error en el servidor");
   }
 });
+
+//TRAEMOS SOLO UN PRODUCTO POR ID
 
 router.get("/:pid", async (req, res) => {
   const id = req.params.pid;
@@ -59,6 +65,8 @@ router.get("/:pid", async (req, res) => {
   }
 });
 
+//AGREGAMOS UN NUEVO PRODUCTO
+
 router.post("/", async (req, res) => {
   const nuevoProducto = req.body;
 
@@ -74,6 +82,8 @@ router.post("/", async (req, res) => {
     });
   }
 });
+
+//ACTUALIZAMOS POR ID
 
 router.put("/:pid", async (req, res) => {
   const id = req.params.pid;
@@ -91,6 +101,8 @@ router.put("/:pid", async (req, res) => {
     });
   }
 });
+
+//ELIMINAMOS PRODUCTO
 
 router.delete("/:pid", async (req, res) => {
   const id = req.params.pid;
