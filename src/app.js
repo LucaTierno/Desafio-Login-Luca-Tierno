@@ -12,7 +12,7 @@ const productsRouter = require("./routes/products.router.js");
 const cartsRouter = require("./routes/carts.router.js");
 const viewsRouter = require("./routes/views.router.js");
 const userRouter = require("./routes/user.router.js");
-const loginRouter = require("./routes/login.router.js");
+const sessionsRouter = require("./routes/sessions.router.js");
 const ProductModel = require("./dao/models/product.model.js");
 
 //Middleware
@@ -47,9 +47,9 @@ app.set("views", "./src/views");
 //Routing:
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
-app.use("/", viewsRouter);
 app.use("/api/users", userRouter);
-app.use("/api/login", loginRouter);
+app.use("/api/sessions", sessionsRouter);
+app.use("/", viewsRouter);
 
 //Páginacio:
 //const paginate = async () => {
