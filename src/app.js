@@ -5,15 +5,20 @@ const socket = require("socket.io");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const ProductModel = require("./dao/models/product.model.js");
 const PUERTO = 8080;
 require("./database.js");
 
+//Passport
+const passport = require("passport");
+const initializePassport = require("./config/passport.config.js");
+
+//Import Routes
 const productsRouter = require("./routes/products.router.js");
 const cartsRouter = require("./routes/carts.router.js");
 const viewsRouter = require("./routes/views.router.js");
 const userRouter = require("./routes/user.router.js");
 const sessionsRouter = require("./routes/sessions.router.js");
-const ProductModel = require("./dao/models/product.model.js");
 
 //Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -38,6 +43,10 @@ app.use(
     }),
   })
 );
+
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Handlebars
 app.engine("handlebars", exphbs.engine());
