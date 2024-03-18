@@ -19,6 +19,7 @@ const cartsRouter = require("./routes/carts.router.js");
 const viewsRouter = require("./routes/views.router.js");
 const userRouter = require("./routes/user.router.js");
 const sessionsRouter = require("./routes/sessions.router.js");
+//const currentRouter = require("./routes/current.router.js")
 
 //Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -59,6 +60,7 @@ app.use("/api/carts", cartsRouter);
 app.use("/api/users", userRouter);
 app.use("/api/sessions", sessionsRouter);
 app.use("/", viewsRouter);
+//app.use("/", currentRouter);
 
 //Páginacio:
 //const paginate = async () => {
@@ -72,6 +74,6 @@ app.use("/", viewsRouter);
 //Escuchamos en el PUERTO 8080:
 const httpServer = app.listen(PUERTO, () => {
   console.log(
-    `Escuchando en el puerto: ${PUERTO}, link: http://localhost:${PUERTO}/`
+    `Escuchando en el puerto: ${PUERTO}, link: http://localhost:${PUERTO}/login`
   );
 });

@@ -17,8 +17,8 @@ router.get("/login", (req, res) => {
     return res.redirect("/profile")
   }
 
-  res.render("login")
-})
+  res.render("login");
+});
 
 module.exports = router;
 
@@ -28,8 +28,8 @@ router.get("/register", (req, res) => {
     return res.redirect("/profile");
   }
 
-  res.render("register")
-})
+  res.render("register");
+});
 
 // RUTA PARA EL PERFIIL
 router.get("/profile", (req, res) => {
@@ -37,7 +37,7 @@ router.get("/profile", (req, res) => {
     return res.redirect("/login")
   }
 
-  res.render("profile", {user: req.session.user})
-})
-
+  res.render("profile", {user: req.session.user});
+});
+ 
 module.exports = router;

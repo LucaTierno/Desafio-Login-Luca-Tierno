@@ -1,5 +1,8 @@
 <h1>Login</h1>
 <form action="/api/sessions/login" method="POST">
+  <div>
+    <a href="/api/sessions/github">Iniciar con Github</a>
+  </div>
   <label for="email">Email:</label>
   <input type="email" id="email" name="email" required />
   <br />
@@ -11,7 +14,3 @@
   <a href="/register">Registrarme</a>
 </form>
 <br />
-<div>
-  <p>Iniciar sesión con </p>
-  <a href="/api/sessions/github">Github</a>
-</div>

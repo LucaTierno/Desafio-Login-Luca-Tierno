@@ -1,6 +1,3 @@
-// Instalamos: npm i passport passport-local
-
-// Importamos los modulos:
 const passport = require("passport");
 const local = require("passport-local");
 
@@ -11,6 +8,7 @@ const { createHash, isValidPassword } = require("../utils/hashBcrypt.js");
 //Passport con GitHub:
 const GitHubStrategy = require("passport-github2");
 
+//PASSPORT-LOCAL
 const LocalStrategy = local.Strategy;
 
 const initializePassport = () => {
@@ -110,7 +108,6 @@ const initializePassport = () => {
           } else {
             done(null, user);
           }
-
         } catch (error) {
           return done(error);
         }
