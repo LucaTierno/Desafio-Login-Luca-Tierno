@@ -74,6 +74,6 @@ app.use("/", viewsRouter);
 //Escuchamos en el PUERTO 8080:
 const httpServer = app.listen(PUERTO, () => {
   console.log(
-    `Escuchando en el puerto: ${PUERTO}, link: http://localhost:${PUERTO}/login`
+    `Escuchando en el puerto: ${PUERTO}, link: http://localhost:${PUERTO}`
   );
 });

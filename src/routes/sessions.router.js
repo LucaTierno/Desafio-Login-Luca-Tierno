@@ -62,7 +62,7 @@ router.get(
     //La estrategía de github nos retornara el usuario, entonces lo agregamos a nuestro objeto de sesion.
     req.session.user = req.user;
     req.session.login = true;
-    res.redirect("/");
+    res.redirect("/profile");
   }
 );
 

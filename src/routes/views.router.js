@@ -36,14 +36,14 @@ router.get("/carts/:cid", async (req, res) => {
   }
 });
 
-
 // RUTA PARA EL FORMULARIO DE LOGIN
 router.get("/", (req, res) => {
   if (req.session.login) {
     return res.redirect("/profile")
   }
-
-  res.render("login");
+  res.render("login", {
+    style: "login.css"
+  });
 });
 
 module.exports = router;

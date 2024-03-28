@@ -1,0 +1,155 @@
+body {
+  background-color: rgb(23, 23, 28);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container-login {
+  width: 470px;
+  margin-top: 90px;
+  margin-left: 230px;
+}
+
+.container-login h1 {
+  color: whitesmoke;
+  font-size: 60px;
+  text-align: center;
+}
+
+.container-login form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ingreso-github {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  border: 1px solid rgb(211, 211, 211);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.ingreso-github i {
+  color: whitesmoke;
+  font-size: 23px;
+}
+
+.ingreso-github a {
+  color: whitesmoke;
+  font-weight: 500;
+}
+
+.separacion {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 35px;
+  align-items: end;
+}
+
+.linea-separacion {
+  height: 1px;
+  width: 45%;
+  background-color: rgb(211, 211, 211);
+}
+
+.circulo-separacion {
+  height: 13px;
+  width: 1.1%;
+  color: rgb(211, 211, 211);
+}
+
+.container-datos {
+  width: 100%;
+}
+
+.ingreso-datos {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingreso-datos label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: rgb(211, 211, 211);
+}
+
+.ingreso-datos input {
+  margin-bottom: 18px;
+  padding: 11px 7px;
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(36, 34, 45);
+  color: rgb(204, 204, 204);
+}
+
+.ingreso-datos input::placeholder {
+  color: rgb(175, 175, 175);
+}
+
+button {
+  width: 100%;
+  background-color: RGB(37, 211, 102);
+  border: none;
+  border-radius: 3px;
+  padding: 12px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-weight: 600;
+  color: rgb(18, 18, 18);
+}
+
+.container-continuar-sin-registrar {
+  width: 100%;
+  display: flex;
+  text-align: center;
+}
+
+.continuar-sin-registrar {
+  width: 100%;
+  background-color: RGB(37, 211, 102);
+  border: none;
+  border-radius: 3px;
+  padding: 12px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 14.4px;
+  color: rgb(18, 18, 18);
+}
+
+.crear-cuenta {
+  text-align: center;
+  color: rgb(211, 211, 211);
+}
+
+.crear-cuenta p {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.crear-cuenta a {
+  font-size: 14px;
+  font-weight: 500;
+  color: RGB(37, 211, 102);
+}
+
+.crear-cuenta .terminos-condiciones {
+  font-size: 13px;
+  width: 80%;
+  margin: auto;
+  margin-top: 15px;
+}
+
+.crear-cuenta .terminos-condiciones span {
+  color: RGB(37, 211, 102);
+}
