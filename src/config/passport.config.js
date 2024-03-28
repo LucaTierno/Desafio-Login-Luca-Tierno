@@ -2,7 +2,7 @@ const passport = require("passport");
 const local = require("passport-local");
 
 //Traemos el UserModel y las funciones de bcrypt
-const UserModel = require("../dao/models/user.model.js");
+const UserModel = require("../models/user.model.js");
 const { createHash, isValidPassword } = require("../utils/hashBcrypt.js");
 
 //Passport con GitHub:

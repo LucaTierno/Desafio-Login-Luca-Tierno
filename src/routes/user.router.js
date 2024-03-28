@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const UserModel = require("../dao/models/user.model");
-const { createHash } = require("../utils/hashBcrypt");
+const UserModel = require("../models/user.model.js");
+const { createHash } = require("../utils/hashBcrypt.js");
 const passport = require("passport");
 const generateToken = require("../utils/jsonwebtoken");
 

@@ -5,7 +5,7 @@ const socket = require("socket.io");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const ProductModel = require("./dao/models/product.model.js");
+const ProductModel = require("./models/product.model.js");
 const PUERTO = 8080;
 require("./database.js");
 
@@ -58,7 +58,7 @@ app.set("views", "./src/views");
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/users", userRouter);
-app.use("/api/sessions", sessionsRouter);
+app.use("/", sessionsRouter);
 app.use("/", viewsRouter);
 //app.use("/", currentRouter);
 

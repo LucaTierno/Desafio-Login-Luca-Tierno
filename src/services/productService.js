@@ -1,51 +1,54 @@
 const ProductModel = require("../models/product.model.js");
 
-class ProductManager {
+class ProductService {
+  //Crear producto
   async addProduct(nuevoObjeto) {
-    let { title, description, code, price, status, stock, category } =
-      nuevoObjeto;
+    try {
+      let { title, description, code, price, status, stock, category } =
+        nuevoObjeto;
 
-    if (
-      !title ||
-      !description ||
-      !code ||
-      !price ||
-      !status ||
-      !stock ||
-      !category
-    ) {
-      console.log(
-        "Todos los campos son obligatorios. Por favor ingresar todos."
-      );
-      return;
+      if (
+        !title ||
+        !description ||
+        !code ||
+        !price ||
+        !status ||
+        !stock ||
+        !category
+      ) {
+        console.log(
+          "Todos los campos son obligatorios. Por favor ingresar todos."
+        );
+        return;
+      }
+
+      const existeProducto = await ProductModel.findOne({ code: code });
+
+      if (existeProducto) {
+        console.log("El código debe ser unico");
+        return;
+      }
+
+      const newProduct = new ProductModel({
+        title,
+        description,
+        price,
+        img: "Sin imagen",
+        code,
+        stock,
+        category,
+        status: true,
+        thumbnails: true,
+      });
+
+      await newProduct.save();
+    } catch (error) {
+      console.log("Error al agregar producto", error);
+      throw error;
     }
-
-    const existeProducto = await ProductModel.findOne({ code: code });
-
-    if (existeProducto) {
-      console.log("El código debe ser unico");
-      return;
-    }
-
-    const newProduct = new ProductModel({
-      title,
-      description,
-      price,
-      img: "Sin imagen",
-      code,
-      stock,
-      category,
-      status: true,
-      thumbnails: thumbnails || [],
-    });
-
-    await newProduct.save();
-  }
-  catch(error) {
-    console.log("Error al agregar producto", error);
-    throw error;
   }
 
+  //Obetener todos los productos
   async getProducts() {
     try {
       const productos = await ProductModel.find();
@@ -55,6 +58,7 @@ class ProductManager {
     }
   }
 
+  //Buscar producto por ID
   async getProductsById(id) {
     try {
       const producto = await ProductModel.findById(id);
@@ -71,6 +75,7 @@ class ProductManager {
     }
   }
 
+  //Alctualizar producto por ID
   async updateProduct(id, productoActualizado) {
     try {
       const updateado = await ProductModel.findByIdAndUpdate(
@@ -90,6 +95,7 @@ class ProductManager {
     }
   }
 
+  //Eliminamos producto por ID
   async deleteProduct(id) {
     try {
       const deleteado = await ProductModel.findByIdAndDelete(id);
@@ -107,4 +113,4 @@ class ProductManager {
   }
 }
 
-module.exports = ProductManager;
+module.exports = ProductService;

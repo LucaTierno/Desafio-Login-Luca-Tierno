@@ -1,10 +1,11 @@
 //Hacemos la conexion con MONGODB
 
 const mongoose = require("mongoose");
+const configObject = require("./config/config.js");
+const {mongo_url} = configObject
+
 
 mongoose
-  .connect(
-    "mongodb+srv://lucatierno:luE8JYX4cFxxYnCa@luca.9uzn73g.mongodb.net/ecommerce?retryWrites=true&w=majority"
-  )
+  .connect(mongo_url)
   .then(() => console.log("Conexión exitosa"))
   .catch(() => console.log("Error de conexión"));

@@ -1,7 +1,7 @@
 const CartModel = require("../models/cart.model.js");
-const ProductModel = require("../models/product.model.js");
 
-class CartManager {
+class CartService {
+  //Crear carrito
   async crearCarrito() {
     try {
       const nuevoCarrito = new CartModel({ products: [] });
@@ -12,6 +12,7 @@ class CartManager {
     }
   }
 
+  //Obtener carrito por id
   async getCarritoById(cartId) {
     try {
       const carrito = await CartModel.findById(cartId);
@@ -25,6 +26,7 @@ class CartManager {
     }
   }
 
+  //Agregar producto al carrito
   async agregarProductoAlCarrito(cartId, productId, quantity = 1) {
     try {
       const carrito = await this.getCarritoById(cartId);
@@ -48,7 +50,7 @@ class CartManager {
     }
   }
 
-  //ELIMINAMOS EL PRODUCTO DEL CARRITO
+  //Eliminamos el producto del carrito
   async deleteProduct(cartId, productId) {
     try {
       const cartSelected = await this.getCarritoById(cartId);
@@ -82,7 +84,7 @@ class CartManager {
     }
   }
 
-  //ACTUALIZAMOS EL CARRITO CON NUEVOS PRODUCTOS
+  //Actualizamos el carrito
   async updateCart(cartId, newProducts) {
     try {
       const cartSelected = await this.getCarritoById(cartId);
@@ -107,7 +109,7 @@ class CartManager {
     }
   }
 
-  //ACTUALIZAMOS EL PRODUCTO DEL CARRITO
+  //Actualizamos el producto del carrito
   async updateCartQuantity(cartId, productId, quantity) {
     try {
       const cartSelected = await this.getCarritoById(cartId);
@@ -139,7 +141,7 @@ class CartManager {
     }
   }
 
-  //ELIMINAR TODOS LOS PRODUCTOS DEL CARRITO
+  //Eliminar todos los productos del carrito
   async deleteProductCart(cartId) {
     try {
       const cartSelected = await CartModel.findByIdAndUpdate(
@@ -162,4 +164,4 @@ class CartManager {
   }
 }
 
-module.exports = CartManager;
+module.exports = CartService;

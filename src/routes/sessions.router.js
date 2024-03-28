@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const UserModel = require("../dao/models/user.model");
+const UserModel = require("../models/user.model.js");
 const { isValidPassword } = require("../utils/hashBcrypt");
 const passport = require("passport");
 const generateToken = require("../utils/jsonwebtoken");
@@ -9,7 +9,7 @@ const generateToken = require("../utils/jsonwebtoken");
 
 // Login
 router.post(
-  "/login",
+  "/",
   passport.authenticate("login", {
     failureRedirect: "/api/sessions/faillogin",
   }),
@@ -43,7 +43,7 @@ router.get("/logout", (req, res) => {
   if (req.session.login) {
     req.session.destroy();
     //res.status(200).send({ message: "Sesion cerrada" }).
-    res.redirect("/login");
+    res.redirect("/");
   }
 });
 
@@ -57,12 +57,12 @@ router.get(
 
 router.get(
   "/githubcallback",
-  passport.authenticate("github", { failureRedirect: "/login" }),
+  passport.authenticate("github", { failureRedirect: "/" }),
   async (req, res) => {
     //La estrategía de github nos retornara el usuario, entonces lo agregamos a nuestro objeto de sesion.
     req.session.user = req.user;
     req.session.login = true;
-    res.redirect("/profile");
+    res.redirect("/");
   }
 );
 
