@@ -1,0 +1,172 @@
+body {
+  background-color: rgb(23, 23, 28);
+  font-family: "Montserrat", sans-serif;
+}
+
+.titulo {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  justify-content: center;
+  gap: 7px;
+}
+
+.titulo i {
+  font-size: 20px;
+  color: whitesmoke;
+}
+
+h1 {
+  text-align: center;
+  color: whitesmoke;
+  font-size: 30px;
+  padding: 0;
+  margin: 0;
+  font-weight: 300;
+}
+
+h1 span {
+  font-weight: 600;
+  color: rgb(37, 211, 102);
+}
+
+h2 {
+  color: whitesmoke;
+  font-size: 60px;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.seccion-registro {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.container-registro {
+  width: 470px;
+  margin-top: 55px;
+  margin-left: 230px;
+}
+
+.container-registro form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-datos {
+  width: 100%;
+}
+
+.ingreso-datos {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingreso-datos label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: rgb(211, 211, 211);
+}
+
+.ingreso-datos input {
+  margin-bottom: 18px;
+  padding: 11px 7px;
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(36, 34, 45);
+  color: rgb(204, 204, 204);
+}
+
+.ingreso-datos input::placeholder {
+  color: rgb(175, 175, 175);
+}
+
+button {
+  width: 100%;
+  background-color: RGB(37, 211, 102);
+  border: none;
+  border-radius: 3px;
+  padding: 12px;
+  cursor: pointer;
+  margin-top: 15px;
+  color: rgb(18, 18, 18);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tengo-cuenta {
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(211, 211, 211);
+}
+
+.tengo-cuenta a {
+  font-size: 14px;
+  font-weight: 500;
+  color: RGB(37, 211, 102);
+}
+
+.caja-decoracion {
+  width: 700px;
+  height: 600px;
+  background-color: rgb(37, 140, 74);
+  margin-top: 105px;
+  border-top-left-radius: 150px;
+  border-top-right-radius: 150px;
+  border-bottom-left-radius: 150px;
+  display: flex;
+  flex-direction: column;
+  color: rgb(238, 238, 238);
+  justify-content: space-evenly;
+}
+
+.caja-decoracion h3 {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 300;
+}
+
+.caja-decoracion h3 span {
+  font-weight: 600;
+}
+
+.caja-decoracion p {
+  margin-bottom: 35px;
+  color: rgb(215, 215, 215);
+}
+
+.container-subtitulo {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.container-subtitulo i {
+  color: RGB(37, 211, 102);
+  font-size: 25px;
+}
+
+.container-subtitulo h5 {
+  font-size: 21px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.centrar {
+  width: 90%;
+  margin: -40px auto 0;
+}
+
+.caja-decoracion .que-esperas {
+  text-align: center;
+}

@@ -5,7 +5,6 @@ const socket = require("socket.io");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const ProductModel = require("./models/product.model.js");
 const PUERTO = 8080;
 require("./database.js");
 
@@ -17,9 +16,7 @@ const initializePassport = require("./config/passport.config.js");
 const productsRouter = require("./routes/products.router.js");
 const cartsRouter = require("./routes/carts.router.js");
 const viewsRouter = require("./routes/views.router.js");
-const userRouter = require("./routes/user.router.js");
 const sessionsRouter = require("./routes/sessions.router.js");
-//const currentRouter = require("./routes/current.router.js")
 
 //Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -57,19 +54,8 @@ app.set("views", "./src/views");
 //Routing:
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
-app.use("/api/users", userRouter);
 app.use("/", sessionsRouter);
 app.use("/", viewsRouter);
-//app.use("/", currentRouter);
-
-//Páginacio:
-//const paginate = async () => {
-//Agregamos un limite de resultados por página:
-//const resultado = await ProductModel.paginate({ stock: 5 }, { limit: 1 });
-
-//console.log(resultado);
-//};
-//paginate();
 
 //Escuchamos en el PUERTO 8080:
 const httpServer = app.listen(PUERTO, () => {

@@ -1,20 +1,105 @@
-<form action="/api/users" method="post">
-    <label for="first_name">First Name:</label>
-    <input type="text" id="first_name" name="first_name" required>
-    <br>
-    <label for="last_name">Last Name:</label>
-    <input type="text" id="last_name" name="last_name" required>
-    <br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <label for="age">Age:</label>
-    <input type="number" id="age" name="age" required>
-    <br>
-    <button type="submit">Register</button>
-    <p>¿Ya tenes una cuenta?</p>
-    <a href="/login">Iniciar sesión</a>
-</form>
+<div class="titulo">
+  <i class="fa-regular fa-futbol"></i>
+  <h1>OFF<span>SIDE</span></h1>
+</div>
+
+<div class="seccion-registro">
+  <div class="container-registro">
+
+    <h2>Registrarse</h2>
+
+    <form action="/api/users" method="post">
+
+      <div class="container-datos">
+
+        <div class="ingreso-datos">
+          <label for="first_name">Nombre</label>
+          <input
+            placeholder="Ingrese su nombre"
+            type="text"
+            id="first_name"
+            name="first_name"
+            required
+          />
+        </div>
+
+        <div class="ingreso-datos">
+          <label for="last_name">Apellido</label>
+          <input
+            placeholder="Ingrese su apellido"
+            type="text"
+            id="last_name"
+            name="last_name"
+            required
+          />
+        </div>
+
+        <div class="ingreso-datos">
+          <label for="email">Correo electrónico</label>
+          <input
+            placeholder="Ingrese su correo electrónico"
+            type="email"
+            id="email"
+            name="email"
+            required
+          />
+        </div>
+
+        <div class="ingreso-datos">
+          <label for="password">Contraseña</label>
+          <input
+            placeholder="ingrese su contraseña"
+            type="password"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+
+        <div class="ingreso-datos">
+          <label for="age">Edad</label>
+          <input
+            placeholder="Ingrese su edad"
+            type="number"
+            id="age"
+            name="age"
+            required
+          />
+        </div>
+
+      </div>
+
+      <button type="submit">Crear cuenta</button>
+
+      <div class="tengo-cuenta">
+        <p>¿Ya tenes una cuenta?</p>
+        <a href="/">Iniciar sesión</a>
+      </div>
+
+    </form>
+
+  </div>
+  <div class="caja-decoracion">
+    <h3>Beneficios al tener una cuenta en OFF<span>SIDE</span></h3>
+    <div class="centrar">
+      <div class="container-subtitulo">
+        <i class="fa-solid fa-check"></i>
+        <h5>Descuentos</h5>
+      </div>
+      <p>Tendrás descuentos únicos por ser un apasionado del fútbol.</p>
+      <div class="container-subtitulo">
+        <i class="fa-solid fa-check"></i>
+        <h5>Favoritos</h5>
+      </div>
+      <p>Podras tener articulos en favoritos para saber todas las novedades.
+        acerca del mismo</p>
+      <div class="container-subtitulo">
+        <i class="fa-solid fa-check"></i>
+        <h5>Envíos</h5>
+      </div>
+      <p>Son GRATIS para todos los clientes que tengan su cuenta en OFFSIDE.</p>
+      <p class="que-esperas">¿Qué esperas para ser parte y vestir la camiseta de
+        tu equipo favorito?</p>
+    </div>
+  </div>
+</div>

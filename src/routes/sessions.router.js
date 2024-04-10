@@ -1,54 +1,34 @@
 const express = require("express");
 const router = express.Router();
-const UserModel = require("../models/user.model.js");
-const { isValidPassword } = require("../utils/hashBcrypt");
 const passport = require("passport");
-const generateToken = require("../utils/jsonwebtoken");
 
-// Versión con passport:
+const UserController = require("../controllers/userController.js")
+const userController = new UserController()
 
-// Login
+///////// Versión con passport /////////
+
 router.post(
   "/",
   passport.authenticate("login", {
-    failureRedirect: "/api/sessions/faillogin",
-  }),
-  async (req, res) => {
-    if (!req.user)
-      return res
-        .status(401)
-        .send({ status: "Error", message: "Credenciales invalidas" });
-
-    req.session.user = {
-      first_name: req.user.first_name,
-      last_name: req.user.last_name,
-      age: req.user.age,
-      email: req.user.email,
-    };
-
-    req.session.login = true;
-
-    res.redirect("/profile");
-  }
+    failureRedirect: "faillogin",
+  }), userController.login
 );
 
-router.get("/faillogin", async (req, res) => {
-  console.log("Fallo la estrategia");
-  res.send({ error: "Error" });
+router.get("/faillogin", userController.faillogin);
+
+router.post(
+  "/",
+  passport.authenticate("register", { failureRedirect: "/failedregister" }),
+  userController.register
+);
+
+router.get("/failedregister", (req, res) => {
+  res.send({ error: "Registro fallido" });
 });
 
-//Logout
+router.get("/logout", userController.logout);
 
-router.get("/logout", (req, res) => {
-  if (req.session.login) {
-    req.session.destroy();
-    //res.status(200).send({ message: "Sesion cerrada" }).
-    res.redirect("/");
-  }
-});
-
-//Version para GITHUB:
-
+//Versión para GITHUB:
 router.get(
   "/github",
   passport.authenticate("github", { scope: ["user:email"] }),
@@ -58,12 +38,7 @@ router.get(
 router.get(
   "/githubcallback",
   passport.authenticate("github", { failureRedirect: "/" }),
-  async (req, res) => {
-    //La estrategía de github nos retornara el usuario, entonces lo agregamos a nuestro objeto de sesion.
-    req.session.user = req.user;
-    req.session.login = true;
-    res.redirect("/profile");
-  }
+  userController.registerGithub
 );
 
 module.exports = router;

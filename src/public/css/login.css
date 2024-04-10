@@ -1,6 +1,6 @@
 body {
   background-color: rgb(23, 23, 28);
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 a {
@@ -17,6 +17,12 @@ a {
   color: whitesmoke;
   font-size: 60px;
   text-align: center;
+  font-weight: 300;
+}
+
+h1 span {
+  color: rgb(37, 211, 102);
+  font-weight: 600;
 }
 
 .container-login form {
@@ -107,6 +113,7 @@ button {
   margin-top: 15px;
   font-weight: 600;
   color: rgb(18, 18, 18);
+  font-size: 13px;
 }
 
 .container-continuar-sin-registrar {
@@ -123,8 +130,9 @@ button {
   padding: 12px;
   cursor: pointer;
   margin-top: 15px;
-  font-size: 14.4px;
+  font-size: 13px;
   color: rgb(18, 18, 18);
+  font-weight: 600;
 }
 
 .crear-cuenta {

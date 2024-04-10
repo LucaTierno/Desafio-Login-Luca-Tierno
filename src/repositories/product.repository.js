@@ -1,6 +1,6 @@
 const ProductModel = require("../models/product.model.js");
 
-class ProductService {
+class ProductRepository {
   //Crear producto
   async addProduct(nuevoObjeto) {
     try {
@@ -113,4 +113,4 @@ class ProductService {
   }
 }
 
-module.exports = ProductService;
+module.exports = ProductRepository;

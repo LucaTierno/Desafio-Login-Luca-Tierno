@@ -1,12 +1,12 @@
 const CartModel = require("../models/cart.model.js");
-const CartService = require("../services/cartService.js");
-const cartService = new CartService();
+const CartRepository = require("../repositories/cart.repository.js");
+const cartRepository = new CartRepository();
 
 class CartController {
   //Crear carrito
-  async crearCarrito() {
+  async crearCarrito(req, res) {
     try {
-      const nuevoCarrito = await cartService.crearCarrito();
+      const nuevoCarrito = await cartRepository.crearCarrito();
       res.json(nuevoCarrito);
     } catch (error) {
       console.error("Error al crear un nuevo carrito", error);
@@ -19,7 +19,7 @@ class CartController {
     const cartId = req.params.cid;
 
     try {
-      const carrito = await cartService.getCarritoById(cartId);
+      const carrito = await cartRepository.getCarritoById(cartId);
       res.json(carrito.products);
     } catch (error) {
       console.error("Error al obtener el carrito", error);
@@ -34,7 +34,7 @@ class CartController {
     const quantity = req.body.quantity || 1;
 
     try {
-      const actualizarCarrito = await cartService.agregarProductoAlCarrito(
+      const actualizarCarrito = await cartRepository.agregarProductoAlCarrito(
         cartId,
         productId,
         quantity
@@ -52,7 +52,7 @@ class CartController {
     const productSelected = req.params.pid;
 
     try {
-      const actualizarCarrito = await cartService.deleteProduct(
+      const actualizarCarrito = await cartRepository.deleteProduct(
         cartSelected,
         productSelected
       );
@@ -73,7 +73,7 @@ class CartController {
       const cartSelected = req.params.cid;
       const newProducts = req.body;
 
-      const actualizarCarrito = await cartService.updateCart(
+      const actualizarCarrito = await cartRepository.updateCart(
         cartSelected,
         newProducts
       );
@@ -91,7 +91,7 @@ class CartController {
     const quantity = req.body.quantity;
 
     try {
-      actualizarCarrito = await cartService.updateCartQuantity(
+      actualizarCarrito = await cartRepository.updateCartQuantity(
         cartSelected,
         productSelected,
         quantity
@@ -112,7 +112,7 @@ class CartController {
     const cartSelected = req.params.cid;
 
     try {
-      deleteProduct = await cartService.deleteProductCart(cartSelected);
+      deleteProduct = await cartRepository.deleteProductCart(cartSelected);
       res.json({
         status: "success",
         message:

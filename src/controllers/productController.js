@@ -1,12 +1,12 @@
 const ProductModel = require("../models/product.model.js");
-const ProductService = require("../services/productService.js");
-const productService = new ProductService();
+const ProductRepository = require("../repositories/product.repository.js");
+const productRepository = new ProductRepository();
 
 class ProductController {
   //Crear producto
   async addProduct(req, res) {
     try {
-      const newProduct = await productService.addProduct(req.body);
+      const newProduct = await productRepository.addProduct(req.body);
       res.json(newProduct)
     } catch (error) {
       res.status(500).json({error: "Error en el servidor"})
@@ -53,7 +53,7 @@ class ProductController {
     const id = req.params.pid;
 
     try {
-      const producto = await productService.getProductsById(id);
+      const producto = await productRepository.getProductsById(id);
       if (!producto) {
         return res.json({
           error: "Producto no encontrado",
@@ -75,7 +75,7 @@ class ProductController {
     const productoActualizado = req.body;
 
     try {
-      await productService.updateProduct(id, productoActualizado);
+      await productRepository.updateProduct(id, productoActualizado);
       res.json({
         message: "Producto actualizado exitosamente",
       });
@@ -92,7 +92,7 @@ class ProductController {
     const id = req.params.pid;
 
     try {
-      await productService.deleteProduct(id);
+      await productRepository.deleteProduct(id);
       res.status(201).json({
         message: "Producto eliminado exitosamente",
       });
