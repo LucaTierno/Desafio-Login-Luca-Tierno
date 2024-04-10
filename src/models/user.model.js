@@ -3,29 +3,38 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   first_name: {
     type: String,
-    require: true,
+    required: true,
   },
+
   last_name: {
     type: String,
-    require: true,
+    required: true,
   },
+
   email: {
     type: String,
-    require: true,
+    required: true,
     index: true,
     unique: true,
   },
+
   password: {
     type: String,
-    require: true,
+    //required: true
   },
+
   age: {
     type: Number,
-    require: true,
+    required: true,
+  },
+  cart: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Cart",
   },
   role: {
     type: String,
-    default: "user",
+    enum: ["admin", "usuario"],
+    default: "usuario",
   },
 });
 

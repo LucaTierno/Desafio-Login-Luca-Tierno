@@ -1,11 +1,10 @@
 const passport = require("passport");
+const jwt = require("passport-jwt");
+const JWTStrategy = jwt.Strategy;
+const ExtractJwt = jwt.ExtractJwt;
 const local = require("passport-local");
-
-//Traemos el UserModel y las funciones de bcrypt
 const UserModel = require("../models/user.model.js");
 const { createHash, isValidPassword } = require("../utils/hashBcrypt.js");
-
-//Passport con GitHub:
 const GitHubStrategy = require("passport-github2");
 
 //PASSPORT-LOCAL
