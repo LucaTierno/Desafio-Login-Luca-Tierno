@@ -1,3 +1,7 @@
+const ProductModel = require("../models/product.model.js");
+const CartRepository = require("../repositories/cart.repository.js");
+const cartRepository = new CartRepository();
+
 class ViewsController {
   //Vista para cargar productos
   async realTimeProducts(req, res) {
@@ -12,9 +16,6 @@ class ViewsController {
 
   //Vista login
   async login(req, res) {
-    if (req.session.login) {
-      return res.redirect("/profile");
-    }
     res.render("login", {
       style: "login.css",
     });
@@ -22,10 +23,6 @@ class ViewsController {
 
   //Vista register
   async register(req, res) {
-    if (req.session.login) {
-      return res.redirect("/profile");
-    }
-
     res.render("register", {
       style: "register.css",
     });
@@ -33,10 +30,6 @@ class ViewsController {
 
   //Vista profile
   async profile(req, res) {
-    if (!req.session.login) {
-      return res.redirect("/");
-    }
-
     res.render("profile", { user: req.session.user });
   }
 }

@@ -32,6 +32,7 @@ class ProductController {
       });
 
       res.render("products", {
+        style: "products.css",
         status: "success",
         payload: resultListProduct,
         product: resultListProduct,

@@ -5,28 +5,15 @@ const passport = require("passport");
 const UserController = require("../controllers/userController.js")
 const userController = new UserController()
 
-///////// Versión con passport /////////
+router.post("/register", userController.register);
 
-router.post(
-  "/",
-  passport.authenticate("login", {
-    failureRedirect: "faillogin",
-  }), userController.login
-);
+router.post("/", userController.login);
 
-router.get("/faillogin", userController.faillogin);
+router.get("/profile", passport.authenticate("jwt", { session: false }), userController.profile);
 
-router.post(
-  "/",
-  passport.authenticate("register", { failureRedirect: "/failedregister" }),
-  userController.register
-);
+router.post("/logout", userController.logout.bind(userController));
 
-router.get("/failedregister", (req, res) => {
-  res.send({ error: "Registro fallido" });
-});
-
-router.get("/logout", userController.logout);
+router.get("/admin", passport.authenticate("jwt", { session: false }), userController.admin);
 
 //Versión para GITHUB:
 router.get(

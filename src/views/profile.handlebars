@@ -1,8 +1,16 @@
-<a href="/api/products">todos los productos</a>
 <h1>Mi Perfil</h1>
-<p>Bienvenido: {{user.first_name}} {{user.last_name}}!</p>
-<p>Email: {{user.email}}</p>
-<a href="/logout">Logout</a>
-<br>
-<br>
-<a href="/realtimeproducts">Cargar productos</a>
+
+<div>
+  <p>Bienvenido, {{user.nombre}} {{user.apellido}}!</p>
+  <p>Rol: {{user.role}}</p>
+
+  <form action="logout" method="POST">
+    <button type="submit">Logout</button>
+  </form>
+
+  {{#if this.isAdmin}}
+    <a href="/realtimeproducts">Modificar Productos</a>
+  {{else}}
+    <a href="/api/products">Tienda</a>
+  {{/if}}
+</div>

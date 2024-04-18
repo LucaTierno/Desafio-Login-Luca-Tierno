@@ -2,28 +2,9 @@ const UserModel = require("../models/user.model.js");
 const CartModel = require("../models/cart.model.js");
 const jwt = require("jsonwebtoken");
 const { createHash, isValidPassword } = require("../utils/hashBcrypt.js");
-//const UserDTO = require("../dto/user.dto.js");
+const UserDTO = require("../dto/user.dto.js");
 
 class UserController {
-  //Login
-  async login(req, res) {
-    if (!req.user)
-      return res
-        .status(401)
-        .send({ status: "Error", message: "Credenciales invalidas" });
-
-    req.session.user = {
-      first_name: req.user.first_name,
-      last_name: req.user.last_name,
-      age: req.user.age,
-      email: req.user.email,
-    };
-
-    req.session.login = true;
-
-    res.redirect("/api/products");
-  }
-
   //Register
   async register(req, res) {
     const { first_name, last_name, email, password, age } = req.body;
@@ -33,6 +14,7 @@ class UserController {
         return res.status(400).send("El usuario ya existe");
       }
 
+      //Creo un nuevo carrito:
       const nuevoCarrito = new CartModel();
       await nuevoCarrito.save();
 
@@ -56,26 +38,68 @@ class UserController {
         httpOnly: true,
       });
 
-      res.redirect("/api/products");
+      res.redirect("profile");
     } catch (error) {
       console.error(error);
       res.status(500).send("Error interno del servidor");
     }
   }
 
-  //Logout
-  async logout(req, res) {
-    if (req.session.login) {
-      req.session.destroy();
-      //res.status(200).send({ message: "Sesion cerrada" }).
-      res.redirect("/");
+  //Login
+  async login(req, res) {
+    const { email, password } = req.body;
+    try {
+      const usuarioEncontrado = await UserModel.findOne({ email });
+
+      if (!usuarioEncontrado) {
+        return res.status(401).send("Usuario no válido");
+      }
+
+      const esValido = isValidPassword(password, usuarioEncontrado);
+      if (!esValido) {
+        return res.status(401).send("Contraseña incorrecta");
+      }
+
+      const token = jwt.sign({ user: usuarioEncontrado }, "coderhouse", {
+        expiresIn: "1h",
+      });
+
+      res.cookie("coderCookieToken", token, {
+        maxAge: 3600000,
+        httpOnly: true,
+      });
+
+      res.redirect("profile");
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Error interno del servidor");
     }
   }
+  
+  //Logout
+  async logout(req, res) {
+    res.clearCookie("coderCookieToken");
+    res.redirect("/");
+  }
 
-  //Fail Login
-  async faillogin(req, res) {
-    console.log("Fallo la estrategia");
-    res.send({ error: "Error" });
+  //Profile
+  async profile(req, res) {
+    //Con DTO:
+    const userDto = new UserDTO(
+      req.user.first_name,
+      req.user.last_name,
+      req.user.role
+    );
+    const isAdmin = req.user.role === "admin";
+    res.render("profile", { user: userDto, isAdmin });
+  }
+  
+  //Admin
+  async admin(req, res) {
+    if (req.user.user.role !== "admin") {
+      return res.status(403).send("Acceso denegado");
+    }
+    res.render("admin");
   }
 
   //Register con Github
