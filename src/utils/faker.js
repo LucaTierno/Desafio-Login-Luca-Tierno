@@ -4,11 +4,14 @@ const generateProducts = () => {
     return {
         id: faker.database.mongodbObjectId(),
         title: faker.commerce.productName(),
-        price: faker.commerce.price(),
-        department: faker.commerce.department(),
-        stock: parseInt(faker.string.numeric()),
         description: faker.commerce.productDescription(),
+        price: faker.commerce.price(),
         img: faker.image.url(),
+        code: faker.string.alphanumeric(),
+        stock: parseInt(faker.string.numeric()),
+        category: faker.commerce.department(),
+        status: faker.datatype.boolean(),
+        thumbnails: faker.image.avatar(),
     }
 }
 
@@ -27,8 +30,8 @@ const generateUser = () => {
         email: faker.internet.email(),
         password: faker.internet.password(),
         age: faker.number.int({min: 10, max:100}),
-        cart
-        //role:
+        cart,
+        role: faker.datatype.boolean(),
     }
 }
 
