@@ -7,7 +7,8 @@ const initializePassport = require("./config/passport.config.js");
 const cors = require("cors");
 const path = require("path")
 const PUERTO = 8080;
-require("./database.js");
+const compression = require("express-compression");
+const manejadorError = require("./middleware/error.js")
 
 //Import Routes
 const productsRouter = require("./routes/products.router.js");
@@ -24,6 +25,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("./src/public"));
 app.use(cors());
+app.use(compression({
+  brotli: {
+    enable: true,
+    zlib: {}  
+  }
+}));
+app.use(manejadorError);
 
 //Passport 
 app.use(passport.initialize());

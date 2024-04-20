@@ -96,7 +96,7 @@ class UserController {
   
   //Admin
   async admin(req, res) {
-    if (req.user.user.role !== "admin") {
+    if (req.user.role !== "admin") {
       return res.status(403).send("Acceso denegado");
     }
     res.render("admin");
