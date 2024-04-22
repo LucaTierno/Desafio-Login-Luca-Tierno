@@ -3,11 +3,29 @@ const CartModel = require("../models/cart.model.js");
 const jwt = require("jsonwebtoken");
 const { createHash, isValidPassword } = require("../utils/hashBcrypt.js");
 const UserDTO = require("../dto/user.dto.js");
+const { Argument } = require("commander");
+const CustomError = require("../services/errors/custom-error.js");
+const { generarInfoError } = require("../services/errors/info.js");
+const { EErrors } = require("../services/errors/enums.js");
 
 class UserController {
   //Register
   async register(req, res) {
     const { first_name, last_name, email, password, age } = req.body;
+    if ((!first_name, !last_name, !email, !password, !age)) {
+      throw CustomError.crearError({
+        nombre: "Usuario nuevo",
+        causa: generarInfoError({
+          first_name,
+          last_name,
+          email,
+          password,
+          age,
+        }),
+        mensaje: "Error al intentar crear un usuario",
+        codigo: EErrors.TIPO_INVALIDO,
+      });
+    }
     try {
       const existeUsuario = await UserModel.findOne({ email });
       if (existeUsuario) {
@@ -75,7 +93,7 @@ class UserController {
       res.status(500).send("Error interno del servidor");
     }
   }
-  
+
   //Logout
   async logout(req, res) {
     res.clearCookie("coderCookieToken");
@@ -93,7 +111,7 @@ class UserController {
     const isAdmin = req.user.role === "admin";
     res.render("profile", { user: userDto, isAdmin });
   }
-  
+
   //Admin
   async admin(req, res) {
     if (req.user.role !== "admin") {
