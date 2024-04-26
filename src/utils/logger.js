@@ -1,4 +1,7 @@
 const winston = require("winston");
+const configObject = require("../config/config.js");
+
+const {node_env} = configObject;
 
 const niveles = {
     nivel: {
@@ -19,27 +22,35 @@ const niveles = {
     }
 }
 
-const logger = winston.createLogger({
+//Desarrollo
+const loggerDesarrollo = winston.createLogger({
     levels: niveles.nivel,
     transports: [
         new winston.transports.Console({
-            level: "http",
-            format: winston.format.combine(
-                winston.format.colorize({colors: niveles.colores}),
-                winston.format.simple()
-            )
-        }),
-        new winston.transports.File({
-            filename: "./errors.log",
-            level: "warning",
-            format: winston.format.simple
+            level: "debug"
         })
     ]
 })
 
+//Producción
+const loggerProduccion = winston.createLogger({
+    levels: niveles.nivel,
+    transports: [
+        new winston.transports.File({
+            filename: "./errors.log",
+            level: "error"
+        })
+    ]
+})
+
+//Determinar que logger utilizar segun el entorno: 
+const logger = node_env === "produccion" ? loggerProduccion : loggerDesarrollo;
+
+
+//Creamos un middleware: 
 const addLogger = (req, res, next) => {
     req.logger = logger;
-    req.logger.http(`${req.method} en ${req.url} - ${req.url} - ${new Date().toLocaleDateString()}`);
+    req.logger.http(`${req.method} en ${req.url} - ${new Date().toLocaleDateString()}`);
     next();
 }
 

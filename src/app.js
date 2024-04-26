@@ -56,7 +56,7 @@ app.use("/api/carts", cartsRouter);
 app.use("/", sessionsRouter);
 app.use("/", viewsRouter);
 app.use("/mockingproducts", mockingRouter);
-app.use("/logerTest", loggerRouter)
+app.use("/loggerTest", loggerRouter);
 
 //Escuchamos en el PUERTO 8080:
 const httpServer = app.listen(PUERTO, () => {
