@@ -9,6 +9,7 @@ const path = require("path")
 const PUERTO = 8080;
 const compression = require("express-compression");
 const manejadorError = require("./middleware/error.js")
+const addLogger = require("./utils/logger.js")
 
 //Import Routes
 const productsRouter = require("./routes/products.router.js");
@@ -16,6 +17,7 @@ const cartsRouter = require("./routes/carts.router.js");
 const viewsRouter = require("./routes/views.router.js");
 const sessionsRouter = require("./routes/sessions.router.js");
 const mockingRouter = require("./routes/mockingUser.router.js");
+const loggerRouter = require("./routes/loggerTest.router.js")
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -32,6 +34,7 @@ app.use(compression({
   }
 }));
 app.use(manejadorError);
+app.use(addLogger);
 
 //Passport 
 app.use(passport.initialize());
@@ -53,6 +56,7 @@ app.use("/api/carts", cartsRouter);
 app.use("/", sessionsRouter);
 app.use("/", viewsRouter);
 app.use("/mockingproducts", mockingRouter);
+app.use("/logerTest", loggerRouter)
 
 //Escuchamos en el PUERTO 8080:
 const httpServer = app.listen(PUERTO, () => {
